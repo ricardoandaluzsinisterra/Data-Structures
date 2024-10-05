@@ -7,11 +7,18 @@ import java.time.LocalDateTime;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * JobManager class to manage a list of jobs using DynamicArrayList.
+ */
 public class JobManager {
 
     private static Scanner scanner = new Scanner(System.in);
     private static DynamicArrayList jobList = new DynamicArrayList();
 
+    /**
+     * Main method to run the JobManager application.
+     * @param args command line arguments.
+     */
     public static void main(String[] args) {
         int numEntries = 0;
         while (true) {
@@ -78,6 +85,10 @@ public class JobManager {
         }
     }
 
+    /**
+     * Creates a Job instance from user input.
+     * @return a new Job instance.
+     */
     private static Job createJobFromUserInput() {
         int id = 0;
         while (true) {
@@ -105,6 +116,9 @@ public class JobManager {
         return job;
     }
 
+    /**
+     * Displays all jobs in the job manager.
+     */
     private static void displayJobs() {
         System.out.println("\nJobs in the manager:");
         for (int i = 0; i < jobList.size(); i++) {
@@ -113,6 +127,9 @@ public class JobManager {
         }
     }
 
+    /**
+     * Sets a job at a specified position in the job manager.
+     */
     private static void setJob() {
         int position = 0;
         while (true) {
@@ -134,6 +151,9 @@ public class JobManager {
         jobList.set(job, position - 1);
     }
 
+    /**
+     * Removes a job at a specified position in the job manager.
+     */
     private static void removeJob() {
         int position = 0;
         while (true) {
@@ -154,6 +174,9 @@ public class JobManager {
         jobList.remove(position - 1);
     }
 
+    /**
+     * Searches for a job by ID in the job manager.
+     */
     private static void searchJob() {
         int id = 0;
         while (true) {
