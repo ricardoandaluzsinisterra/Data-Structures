@@ -4,6 +4,7 @@ import ca1.model.Job;
 import ca1.utils.DynamicArrayList;
 
 import java.time.LocalDateTime;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class JobManager {
@@ -12,9 +13,18 @@ public class JobManager {
     private static DynamicArrayList jobList = new DynamicArrayList();
 
     public static void main(String[] args) {
-        System.out.print("How many entries would you like to add to your job manager? ");
-        int numEntries = scanner.nextInt();
-        scanner.nextLine();
+        int numEntries = 0;
+        while (true) {
+            try {
+                System.out.print("How many entries would you like to add to your job manager? ");
+                numEntries = scanner.nextInt();
+                scanner.nextLine();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+                scanner.nextLine();
+            }
+        }
 
         for (int i = 0; i < numEntries; i++) {
             Job job = createJobFromUserInput();
@@ -32,8 +42,15 @@ public class JobManager {
             System.out.println("5. Display Jobs");
             System.out.println("6. Exit");
             System.out.print("Choose an action: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // consume newline
+            int choice = 0;
+            try {
+                choice = scanner.nextInt();
+                scanner.nextLine();
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+                scanner.nextLine();
+                continue;
+            }
 
             switch (choice) {
                 case 1:
@@ -62,9 +79,19 @@ public class JobManager {
     }
 
     private static Job createJobFromUserInput() {
-        System.out.print("Enter Job ID: ");
-        int id = scanner.nextInt();
-        scanner.nextLine(); // consume newline
+        int id = 0;
+        while (true) {
+            try {
+                System.out.print("Enter Job ID: ");
+                id = scanner.nextInt();
+                scanner.nextLine();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+                scanner.nextLine();
+            }
+        }
+
         System.out.print("Enter Job Owner: ");
         String owner = scanner.nextLine();
         System.out.print("Enter Job Description: ");
@@ -82,34 +109,69 @@ public class JobManager {
         System.out.println("\nJobs in the manager:");
         for (int i = 0; i < jobList.size(); i++) {
             Job job = jobList.get(i);
-            System.out.println(job);
+            System.out.println((i + 1) + ". " + job);
         }
     }
 
     private static void setJob() {
-        System.out.print("Enter position to set: ");
-        int position = scanner.nextInt();
-        scanner.nextLine(); 
+        int position = 0;
+        while (true) {
+            try {
+                System.out.print("Enter position to set: ");
+                position = scanner.nextInt();
+                scanner.nextLine();
+                if (position < 1 || position > jobList.size()) {
+                    System.out.println("Invalid position. Please enter a number between 1 and " + jobList.size());
+                    continue;
+                }
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+                scanner.nextLine();
+            }
+        }
         Job job = createJobFromUserInput();
-        jobList.set(job, position);
+        jobList.set(job, position - 1);
     }
 
     private static void removeJob() {
-        System.out.print("Enter position to remove: ");
-        int position = scanner.nextInt();
-        scanner.nextLine(); 
-        jobList.remove(position);
+        int position = 0;
+        while (true) {
+            try {
+                System.out.print("Enter position to remove: ");
+                position = scanner.nextInt();
+                scanner.nextLine();
+                if (position < 1 || position > jobList.size()) {
+                    System.out.println("Invalid position. Please enter a number between 1 and " + jobList.size());
+                    continue;
+                }
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+                scanner.nextLine();
+            }
+        }
+        jobList.remove(position - 1);
     }
 
     private static void searchJob() {
-        System.out.print("Enter Job ID to search: ");
-        int id = scanner.nextInt();
-        scanner.nextLine(); 
+        int id = 0;
+        while (true) {
+            try {
+                System.out.print("Enter Job ID to search: ");
+                id = scanner.nextInt();
+                scanner.nextLine();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid number.");
+                scanner.nextLine();
+            }
+        }
         Job searchJob = new Job();
         searchJob.setId(id);
         int index = jobList.indexOf(searchJob);
         if (index != -1) {
-            System.out.println("Job found at position: " + index);
+            System.out.println("Job found at position: " + (index + 1));
         } else {
             System.out.println("Job not found.");
         }
