@@ -1,0 +1,17 @@
+Insert into a list
+
+Input: Data to be inserted, position at which to insert
+Output: Edited list (No RETURNED output.)
+
+If supplied position < 0 OR > number of elements in list:
+    throw IndexOutOfBoundsException
+
+if count equals length of array:
+    Grow array
+
+Copy X elements starting from specific position in array
+INTO position + 1 in array
+Where X is count - position
+Code equivalent: System.arraycopy(data, pos, data, pos+1, (count-pos);
+
+Insert value into position in array

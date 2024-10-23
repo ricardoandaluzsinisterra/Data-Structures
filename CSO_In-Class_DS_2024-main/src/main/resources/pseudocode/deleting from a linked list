@@ -1,0 +1,27 @@
+Action: Deleting from a specific position in a linked list
+Input: Position from which to delete
+Output: Data that has been removed
+
+//VALIDATION
+If position is outside bounds of list:
+    Throw new exception
+
+//REUSE?
+if position equals length of list -1:
+    Call removeLast()
+else if position equals 0:
+    Call removeFirst()
+else:
+    // SET-UP:
+
+    Create a node (current) to track current position in list and set to head
+    Create a node (prev) to track previous position in list and set to null
+
+    // LOGIC
+    // REMOVAL
+    for each position up to pos:
+        Set prev to current
+        Set current to current.next
+
+    Set prev.next to current.next
+    Decrement counter
