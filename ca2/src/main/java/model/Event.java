@@ -9,6 +9,7 @@ public class Event implements Comparable<Event> {
     public final static String[] VALID_SOURCES = {"HEAT", "TEMP", "PLUG", "MOTION", "CAMERA"};
     private UUID id;
     private LocalDateTime timestamp;
+    private UUID sensorId;
     private final String source;
     private final String description;
 
@@ -77,6 +78,15 @@ public class Event implements Comparable<Event> {
     }
 
     /**
+     * Returns the ID of the sensor from which the Event has occurred.
+     *
+     * @return the ID of the sensor.
+     */
+    public UUID getSensorId(){
+        return sensorId;
+    }
+
+    /**
      * Returns a string representation of the event.
      *
      * @return a string representation of the event
@@ -86,6 +96,7 @@ public class Event implements Comparable<Event> {
         return "Event{" +
                 "id=" + id +
                 ", timestamp=" + timestamp +
+                ", sensorID=" + sensorId +
                 ", source='" + source + '\'' +
                 ", description='" + description + '\'' +
                 '}';
@@ -101,6 +112,7 @@ public class Event implements Comparable<Event> {
                Event Details:
                ID: """ + id + "\n" +
                 "Timestamp: " + timestamp + "\n" +
+                "Sensor ID: " + sensorId + "\n" +
                 "Source: " + source + "\n" +
                 "Description: " + description;
     }
