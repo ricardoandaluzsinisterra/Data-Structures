@@ -1,5 +1,7 @@
 package utils;
 
+import java.util.ArrayList;
+
 public class HashMap<K, V> {
     private static final int DEFAULT_CAPACITY = 23;
     private Entry<K, V>[] data;
@@ -19,8 +21,8 @@ public class HashMap<K, V> {
         return hash;
     }
 
-    private boolean isKey(K K){
-        for(Entry entry : data){
+    public boolean containsKey(K K){
+        for(Entry<K, V> entry : data){
             if(entry.getKey() == K){
                 return true;
             }
@@ -42,9 +44,34 @@ public class HashMap<K, V> {
         }
     }
 
-    
+    public V remove(K K){
+        int slot = hashFunction(K);
+        if (data[slot] != null){
+            V previousValue = data[slot].getValue();
+            data[slot] = null;
+            size--;
+            return previousValue;
+        }
+        else{
+            return null;
+        }
+    }
 
+    public ArrayList<K> getKeys(){
+        ArrayList<K> keys = new ArrayList<K>();
+        for (Entry<K, V> entry : data){
+            keys.add(entry.getKey());
+        }
+        return keys;
+    }
 
+    public ArrayList<V> getValues(){
+        ArrayList<V> values = new ArrayList<V>();
+        for (Entry<K, V> entry : data){
+            values.add(entry.getValue());
+        }
+        return values;
+    }
 
     private static class Entry<K, V> {
         private final K key;
