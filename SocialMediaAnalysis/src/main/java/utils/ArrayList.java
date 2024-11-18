@@ -1,10 +1,9 @@
 package utils;
-// Create a class called ArrayList (CapWords for class names)
 
 import model.PostEngagement;
 
 public class ArrayList {
-    private PostEngagement [] engagements;
+    public PostEngagement [] engagements;
     private int count;
 
     public ArrayList(){
@@ -62,6 +61,39 @@ public class ArrayList {
         return deleted;
     }
 
+    public ArrayList filter(String postId){
+        ArrayList filteredArray = new ArrayList();
+        for (PostEngagement engagement : engagements){
+            if (engagement != null){
+                if (engagement.getPostId().compareTo(postId) == 0){
+                    filteredArray.add(engagement);
+                }
+            }
+            
+        }
+        filteredArray.display();
+        return filteredArray;
+    }
+
+    public ArrayList checkIfBoth(ArrayList array2){
+        PostEngagement[] postIDs = new PostEngagement[count];
+        
+        
+        for (int i=0; i < array2.size(); i++){
+            if (engagements.checkIfDuplicate(array2.get(i)));
+        }
+    }
+
+    public int checkIfDuplicate(PostEngagement engagement){
+        for (int i=0; i < count; i++){
+            if (engagements[i] == engagement){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
     public void bubbleSort(){
         boolean swapped = true;
         int i = 0;
@@ -77,6 +109,14 @@ public class ArrayList {
         }
     }
 
+    public void display(){
+        for (PostEngagement engagement :engagements){
+            if (engagement != null){
+                System.out.println(engagement.format());
+            }
+        }
+    }
+
     private void swap(int pos1, int pos2) {
         PostEngagement temp = engagements[pos1];
         engagements[pos1] = engagements[pos2];
@@ -88,6 +128,7 @@ public class ArrayList {
             throw new ArrayIndexOutOfBoundsException("Supplied position must be within the boundary of the array");
         }
     }
+
 
 }
 
