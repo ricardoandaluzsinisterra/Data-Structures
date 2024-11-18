@@ -80,4 +80,9 @@ public class PostEngagement {
         result = 31 * result + type.hashCode();
         return result;
     }
+
+
+    public int compareTo(PostEngagement other) {
+        return this.timestamp.compareTo(other.timestamp);
+    }
 }
