@@ -1,0 +1,8 @@
+Wel, I got stuck in the third one because instead of trying to write a map myself I just
+went with yours but obviously that would generate problems in the long run. I decided to go to the next one and I did finish it, that one I wanted to do a map as well but since I couldnt get it done on time 
+I just decided to keep going with array lists.
+
+second part I wanted to go with sets but I didnt have it ready and time was approaching so 
+I tried to check for dupes myself, but couldnt get it on time.
+
+For the last one I also wanted to go with maps but no chance with the time hahhaha.
