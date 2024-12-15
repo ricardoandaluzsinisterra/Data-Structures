@@ -1,5 +1,127 @@
 package applications;
 
+import java.util.ArrayList;
+import java.util.NoSuchElementException;
+
+import model.Book;
+
 public class ListApp {
-    
+    public static void main(String[] args) {
+        ArrayList<Book> list = createAndPopulate();
+        search(list, 1);
+        search(list, "fiction");
+        hasBook(list, "Con Ardientes Fulgores de gloria");
+        retrieveAndSort(list, "1941");
+    }
+
+    public static ArrayList<Book> createAndPopulate(){
+        Book book1 = new Book(1, "Con Ardientes Fulgores de gloria", "Juan David Morgan", "History/Fiction" , "2017");
+        Book book2 = new Book(2, "Crime and Punishment", "Fyodor Dostoevsky", "Fiction", "1866");
+        Book book3 = new Book(3, "La Loma de Cristal", "Rogelio Sinán", "Fiction", "1941");
+        Book book4 = new Book(4, "Luna Verde", "Rogelio Sinán", "Poetry", "1944");
+        Book book5 = new Book(5, "El Ahogado", "Tristán Solarte", "Fiction", "1963");
+
+        ArrayList<Book> list = new ArrayList<>();
+        
+        list.add(book1);
+        list.add(book2);
+        list.add(book3);
+        list.add(book4);
+        list.add(book5);
+
+        return list;
+    }
+
+    public static void search(ArrayList<Book> list, int id){
+        System.out.println("1. Search for books by ID:");
+        try {
+            Book book = idSearch(list, id);
+            System.out.println(book.format());
+        } 
+        catch (Exception e) {
+            System.err.println("Error: "+e);
+        }
+    }
+
+    private static Book idSearch(ArrayList<Book> list, int id){
+        for (Book book : list){
+            if (book.getId() == id){
+                return book;
+            }
+        }
+        throw new NoSuchElementException("Book not found");
+    }
+
+    public static void search(ArrayList<Book> list, String genre){
+        System.out.println("\n2. Find all books under a particular genre:");
+        try {
+            ArrayList<Book> genreBooks = genreSearch(list, genre);
+            for (Book book : genreBooks){
+                System.out.println(book.format()+"\n");
+            }
+        } 
+        catch (Exception e) {
+            System.err.println("Error: "+e);
+        }
+    }
+
+    private static ArrayList<Book> genreSearch(ArrayList<Book> list, String genre){
+        ArrayList<Book> genreBooks = new ArrayList<>();
+        for (Book book : list){
+            if (book.getGenre().toLowerCase().equals(genre.toLowerCase())){
+                genreBooks.add(book);
+            }
+        }
+
+        if (genreBooks.isEmpty()){
+            throw new NoSuchElementException("No books were found.");
+        }
+
+        return genreBooks;
+        
+    }
+
+    private static boolean contains(ArrayList<Book> list, String title){
+        for (Book book : list){
+            if (book.getTitle().toLowerCase().equals(title.toLowerCase())){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void hasBook(ArrayList<Book> list, String title){
+        System.out.println("\n3. Determine whether a book with a specific title exists in the library");
+        System.out.println(contains(list, title));
+    }
+
+    private static ArrayList<Book> retrieveBooks(ArrayList<Book> list, String year){
+        ArrayList<Book> BooksOfYear = new ArrayList<>();
+        for (Book book : list){
+            if (book.getYearOfPublication().equals(year)){
+                BooksOfYear.add(book);
+            }
+        }
+
+        if (BooksOfYear.isEmpty()){
+            throw new NoSuchElementException("No books were found.");
+        }
+
+        return BooksOfYear;
+    }
+
+    public static void retrieveAndSort(ArrayList<Book> list, String year){
+        System.out.println("\n4. Retrieve books published in a specific year, sorted by their titles.\n");
+        System.out.println("Done, but not sorted. For that sort by title I would need to create my own sort or modify the natural order of Book.\n");
+        try {
+            ArrayList<Book> BooksOfYear = retrieveBooks(list, year);
+            for (Book book : BooksOfYear){
+                System.out.println(book.format()+"\n");
+            }
+        } 
+        catch (Exception e) {
+            System.err.println("Error: "+e);
+        }
+    }
+
 }

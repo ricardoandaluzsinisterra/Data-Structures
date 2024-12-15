@@ -44,7 +44,7 @@ public class BSTApp {
     public static void findAll(){
         System.out.println("\n2. Find all books under a particular genre.\n");
         System.err.println("Can't do in BST. Stacks (the base for BST's) are not designed for this kind of retrieval.");
-        System.err.println("For me to implement this I would need to (from the BST) return a List of books but this would be over complicating the Data Structure\n");
+        System.err.println("For me to implement this I would need to (from the BST)iterate through the Stack and return a List of books but this would be over complicating the Data Structure\n");
     }
 
     public static void hasBook(BinarySearchTree tree, String title){
@@ -62,7 +62,7 @@ public class BSTApp {
         System.out.println("\n4. Retrieve books published in a specific year, sorted by their titles.\n");
         System.err.println("Again, the same logic:");
         System.err.println("Can't do in BST. Stacks (the base for BST's) are not designed for this kind of retrieval.");
-        System.err.println("For me to implement this I would need to (from the BST) return a List of books but this would be over complicating the Data Structure\n");
+        System.err.println("For me to implement this I would need to (from the BST)iterate through the Stack and return a List of books but this would be over complicating the Data Structure\n");
     }
 
 }
