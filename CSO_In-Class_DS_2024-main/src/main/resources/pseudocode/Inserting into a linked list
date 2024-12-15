@@ -1,0 +1,32 @@
+Aim: Insert into a linkedlist (not at end)
+Input: Data to be inserted, position at which to insert
+Output: List updated. Nothing returned.
+
+// VALIDATION:
+If data is null:
+    Throw new IllegalArgumentException -> data is unfit for insertion
+
+if position is invalid (> length of list OR < 0):
+    Throw new IndexOutOfBoundsException -> Position is outside bounds of the list
+
+// REUSE??
+if position equals length of list:
+    Call add()
+else if position equals 0:
+    Call addFirst()
+else:
+    // SET-UP:
+    Create a wrapper node (newNode) to hold supplied data
+
+    Create a node (current) to track current position in list and set to head
+    Create a node (prev) to track previous position in list and set to null
+
+    // LOGIC
+    // INSERTION
+    for each position up to pos:
+        Set prev to current
+        Set current to current.next
+
+    Set newNode.next to current
+    Set prev.next to newNode
+    Increment counter

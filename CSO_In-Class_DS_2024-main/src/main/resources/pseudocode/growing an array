@@ -1,0 +1,10 @@
+Grows an existing array
+Input: None
+Output: None
+
+Create a new array of size original array + 10
+For each element in original array:
+	Copy current element into current slot in new array
+
+Set original array to new array
+data = enlargedArray

@@ -1,7 +1,10 @@
 package utils;
 
-import model.Book;
+import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Stack;
+
+import model.Book;
 
 
 public class BinarySearchTree {
@@ -89,7 +92,7 @@ public class BinarySearchTree {
     public Book get(int id){
         Node book = get(root, id);
         if (book == null){
-            throw new NoSuchElementException("No elements were found with the Id provided");
+            throw new NoSuchElementException("No books were found with the Id provided");
         }
         return book.data;
     }
@@ -108,6 +111,7 @@ public class BinarySearchTree {
             return get(root.right, id);
         }
     }
+    
     public Book getMin(){
         if(root == null){
             return null;
@@ -136,6 +140,83 @@ public class BinarySearchTree {
         return getMax(root.right);
     }
 
+    public Book getByTitle(String title){
+        Node book = getByTitle(root, title);
+        if (book == null){
+            throw new NoSuchElementException("No books were found with the title provided");
+        }
+        return book.data;
+    }
+
+    public Node getByTitle(Node root, String title){
+        if (root == null){
+            return null;
+        }
+        //"start" the stack
+        InOrderIterator iterator = iterator();
+        //traverse through the stack
+        while (iterator.hasNext()){
+            //get the current book in the stack
+            Node currentNode = iterator.next();
+            if (currentNode.data.getTitle().equals(title)){
+                return currentNode;
+            }
+        }
+        return null;
+    }
+
+    public void formatInOrder() {
+        if (isEmpty()) {
+            System.out.println("Tree is empty!");
+        } else {
+            formatInOrder(root);
+        }
+    }
+
+    private void formatInOrder(Node root) {
+        if (root != null) {
+            formatInOrder(root.left);
+            System.out.print(root.data + " ");
+            formatInOrder(root.right);
+        }
+    }
+
+    public InOrderIterator iterator(){
+        return new InOrderIterator(root);
+    }
+
+    static class InOrderIterator implements Iterator<Node>{
+        private final Stack<Node> traversal;
+
+        public InOrderIterator(Node root){
+            traversal = new Stack<>();
+            fillLeft(root);
+        }
+
+        public boolean hasNext(){
+            return !traversal.isEmpty();
+        }
+
+        private void fillLeft(Node current){
+            while (current != null){
+                traversal.push(current);
+                current = current.left;
+            }
+        }
+
+        public Node next(){
+            if (!hasNext()){
+                throw new NoSuchElementException("No elements remaining");
+            }
+
+            Node current = traversal.pop();
+            if (current.right != null){
+                fillLeft(current.right);
+            }
+            return current;
+        }
+    }
+
     protected static class Node{
         Book data;
         Node left;
@@ -155,6 +236,12 @@ public class BinarySearchTree {
         public DeletedNode(Node node, Book deletedValue){
             this.node = node;
             this.element = deletedValue;
+        }
+    }
+
+    private static  void validateBook(Book book) {
+        if (book == null) {
+            throw new IllegalArgumentException("Cannot search for nulls");
         }
     }
 }

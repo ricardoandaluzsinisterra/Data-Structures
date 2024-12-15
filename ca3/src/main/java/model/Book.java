@@ -16,7 +16,7 @@ public class Book implements Comparable<Book> {
         this.yearOfPublication = yearOfPublication;
 
         bookCount++;
-        this.id = bookCount;
+        this.id = id;
     }
 
     public int getId() {
@@ -49,6 +49,12 @@ public class Book implements Comparable<Book> {
                 '}';
     }
 
+
+    public String format() {
+    return String.format("Title: %s\nAuthor: %s\nGenre: %s\nYear of Publication: %s",
+            title, author, genre, yearOfPublication);
+}
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -60,7 +66,7 @@ public class Book implements Comparable<Book> {
 
     @Override
     public int compareTo(Book o) {
-        return Integer.compare(o.id, this.id);
+        return Integer.compare(this.id, o.id);
     }
 
 
