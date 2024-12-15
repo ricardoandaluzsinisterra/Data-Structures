@@ -1,21 +1,18 @@
 package model;
 
 public class Book implements Comparable<Book> {
-    private static int bookCount = 0;
-
-    private int id;
-    private String title;
-    private String author;
-    private String genre;
-    private String yearOfPublication;
+    
+    private final int id;
+    private final String title;
+    private final String author;
+    private final String genre;
+    private final String yearOfPublication;
 
     public Book(int id, String title, String author, String genre, String yearOfPublication){
         this.title = title;
         this.author = author;
         this.genre = genre;
         this.yearOfPublication = yearOfPublication;
-
-        bookCount++;
         this.id = id;
     }
 
